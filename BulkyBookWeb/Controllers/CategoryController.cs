@@ -24,6 +24,23 @@ namespace BulkyBookWeb.Controllers
         }
 
 
+        public IActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var categoryFromDb = _db.Categories.Find(id);
+            if (categoryFromDb == null)
+            {
+                return NotFound();
+            }
+            _db.Categories.Remove(categoryFromDb);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+
 
         public IActionResult Edit(int? id)
         {
